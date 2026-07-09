@@ -1,0 +1,39 @@
+name: Build PrecisionMouseFilter.exe
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Setup CMake
+        uses: lukka/get-cmake@latest
+
+      - name: Configurar CMake (preset x64-release)
+        run: cmake --preset x64-release
+
+      - name: Compilar (preset x64-release)
+        run: cmake --build --preset x64-release --config Release
+
+      - name: Verificar artefato
+        shell: pwsh
+        run: |
+          if (Test-Path "out/build/x64-release/Release/PrecisionMouseFilter.exe") {
+            Write-Output "Build successful: exe found"
+          } else {
+            Get-ChildItem -Path "out/build" -Recurse -Include "*.exe"
+          }
+
+      - name: Publicar o .exe como artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: PrecisionMouseFilter
+          path: out/build/x64-release/Release/PrecisionMouseFilter.exe
+          if-no-files-found: error
