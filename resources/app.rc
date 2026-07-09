@@ -1,0 +1,25 @@
+#include <windows.h>
+#include "resource.h"
+
+1 24 "app.manifest"
+
+IDD_HOTKEY_CAPTURE DIALOGEX 0, 0, 220, 80
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Definir atalho"
+FONT 9, "Segoe UI"
+BEGIN
+    LTEXT "Pressione a combinacao de teclas desejada...", IDC_STATIC, 10, 10, 200, 20
+    LTEXT "", IDC_HOTKEY_PREVIEW, 10, 35, 200, 20
+    PUSHBUTTON "Cancelar", IDCANCEL, 75, 55, 70, 18
+END
+
+IDD_WIZARD_STEP DIALOGEX 0, 0, 260, 110
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Calibracao automatica"
+FONT 9, "Segoe UI"
+BEGIN
+    LTEXT "", IDC_WIZARD_TITLE, 10, 10, 240, 16
+    LTEXT "", IDC_WIZARD_INSTR, 10, 30, 240, 30
+    LTEXT "", IDC_WIZARD_COUNTDOWN, 10, 65, 240, 16
+    PUSHBUTTON "Cancelar", IDCANCEL, 95, 85, 70, 18
+END
